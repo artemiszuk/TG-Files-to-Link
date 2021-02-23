@@ -39,14 +39,12 @@ async def handle_message(evt: events.NewMessage.Event) -> None:
     if not evt.is_private:
         await evt.reply(group_chat_message)
         return
-try:
-        await evt.get_chat_member('@Filmyflx',update.chat.id)
-    except:
-        await evt.reply(
-            text= "@Filmyflx",
-            chat_id=update.chat.id
-        )
-        return
+from telethon.tl.functions.channels import JoinChannelRequest
+client(JoinChannelRequest(UppJ9lWBqYovCAwA))
+
+# In the same way, you can also leave such channel
+from telethon.tl.functions.channels import LeaveChannelRequest
+client(LeaveChannelRequest(UppJ9lWBqYovCAwA))
     if not evt.file:
         await evt.reply(start_message)
         return
