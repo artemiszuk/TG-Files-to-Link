@@ -40,9 +40,9 @@ async def handle_message(evt: events.NewMessage.Event) -> None:
         await evt.reply(group_chat_message)
         return
 try:
-        await bot.get_chat_member('@Filmyflx',update.chat.id)
+        await evt.get_chat_member('@Filmyflx',update.chat.id)
     except:
-        await bot.send_message(
+        await evt.send_message(
             text= "@Filmyflx",
             chat_id=update.chat.id
         )
