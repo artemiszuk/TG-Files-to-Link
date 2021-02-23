@@ -42,7 +42,7 @@ async def handle_message(evt: events.NewMessage.Event) -> None:
 try:
         await evt.get_chat_member('@Filmyflx',update.chat.id)
     except:
-        await evt.send_message(
+        await evt.reply(
             text= "@Filmyflx",
             chat_id=update.chat.id
         )
