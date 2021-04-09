@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.'
 import logging
 
-from telethon import TelegramClient, events
+from telethon import TelegramClient, events , Button
 
 from .paralleltransfer import ParallelTransferrer
 from .config import (
@@ -39,16 +39,17 @@ async def handle_message(evt: events.NewMessage.Event) -> None:
     if not evt.is_private:
         await evt.reply(group_chat_message)
         return
-from telethon.tl.functions.channels import JoinChannelRequest
-client(JoinChannelRequest(UppJ9lWBqYovCAwA))
-
-# In the same way, you can also leave such channel
-from telethon.tl.functions.channels import LeaveChannelRequest
-client(LeaveChannelRequest(UppJ9lWBqYovCAwA))
     if not evt.file:
         await evt.reply(start_message)
         return
+        await evt.reply(start_message,buttons=keyboard,parse_mode='md')
+        return
     url = public_url / str(pack_id(evt)) / get_file_name(evt)
-    await evt.reply(f"Link to download file: {url}")
+    url_button = [
+        [
+            Button.url("Download Now", f"{url}")
+        ]
+    ]
+    await evt.reply(f"**Your Link is Generated.**\n\n**Download Link**: `{url}`\n\n__(Tap to Copy!)__",buttons=url_button,parse_mode="md")
     log.info(f"Replied with link for {evt.id} to {evt.from_id} in {evt.chat_id}")
     log.debug(f"Link to {evt.id} in {evt.chat_id}: {url}")
